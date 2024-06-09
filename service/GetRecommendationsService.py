@@ -7,9 +7,9 @@ from validator.RecommendationsValidator import RecommendationsValidator
 
 class GetRecommendationsService:
 
-    @staticmethod
+    @staticmethod 
     def get_recommendations(movie_id: str, quantity: int, user_id: str, file_name: str) -> Union[List[dict], dict]:
-        # Validations
+        # Validationss
         result = RecommendationsValidator.file_nameValidate(user_id, file_name)
         if result is not None:
             return result
