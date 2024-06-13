@@ -1,6 +1,5 @@
 from typing import List, Union
 import numpy as np
-import pandas as pd
 
 from functions.LoadData import LoadData
 from validator.RecommendationsValidator import RecommendationsValidator  
@@ -9,6 +8,7 @@ class GetRecommendationsService:
 
     @staticmethod 
     def get_recommendations(movie_id: str, quantity: int, user_id: str, file_name: str) -> Union[List[dict], dict]:
+
         # Validationss
         result = RecommendationsValidator.file_nameValidate(user_id, file_name)
         if result is not None:
@@ -29,8 +29,11 @@ class GetRecommendationsService:
         # Load movies data
         movies = LoadData.load_data(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
 
+        idColumn = movies.columns[0]
+        titleColumn = movies.columns[1]
+
         try:
-            idx = movies[movies['tconst'] == movie_id].index[0]
+            idx = movies[movies[idColumn] == movie_id].index[0]
         except IndexError:
             return {"error": f"Movie with ID {movie_id} not found"}
 
@@ -42,7 +45,7 @@ class GetRecommendationsService:
 
         # Return the list of movie titles and ids
         recommendations = [
-            {"tconst": movies.at[i, "tconst"], "primaryTitle": movies.at[i, "primaryTitle"]}
+            {idColumn: movies.at[i, idColumn], titleColumn: movies.at[i, titleColumn]}
             for i in movie_indices
         ]
 

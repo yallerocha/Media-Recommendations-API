@@ -8,6 +8,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 
 from functions.GetClientIP import GetClientIP
 from service.GetRecommendationsService import GetRecommendationsService
+from service.UploadFileService import UploadFileService
 
 from functions.CalculateSimilarity import CalculateSimilarity
 from functions.LoadData import LoadData
@@ -18,56 +19,20 @@ app = Flask(__name__)
 
 class RecommendationsController:
 
-    app.config['UPLOAD_FOLDER'] = 'uploads/user_files'
-
     @app.route('/upload', methods=['POST'])
     def upload_file():
-        # Verifica se a requisição contém a parte 'file'
         if 'file' not in request.files:
-            return jsonify({'error': 'No file part'}), 400
-        
+            return jsonify({'error': 'Missing file parameter'}), 400
         file = request.files['file']
         
-        # Verifica se o nome do arquivo está vazio
-        if file.filename == '':
-            return jsonify({'error': 'No selected file'}), 400
+        idColumn = request.form.get('idColumn')
+        titleColumn = request.form.get('titleColumn')
+        user_id = request.remote_addr
         
-        file_extension = file.filename.split('.')[-1]
-        
-        if file_extension in ['tsv', 'csv', 'xlsx', 'xls', 'json']:
-            # Usa o endereço IP do cliente como user_id
-            user_id = request.remote_addr
-            
-            # Define o caminho da pasta do usuário
-            user_folder = os.path.join(app.config['UPLOAD_FOLDER'], user_id)
-            
-            # Cria a pasta do usuário, se não existir
-            os.makedirs(user_folder, exist_ok=True)
-            
-            # Define o caminho completo do arquivo
-            filepath = os.path.join(user_folder, file.filename)
-            
-            # Salva o arquivo no caminho especificado
-            file.save(filepath)
-            
-            # Carrega os dados do arquivo para um DataFrame
-            movies = LoadData.load_data(filepath, file_extension)
-
-            movies = PreprocessData.preprocess_data(movies)
-            SaveData.save_data(movies, filepath, file_extension)
-            
-            # Calcula a similaridade dos filmes
-            cosine_sim = CalculateSimilarity.calculate_similarity(movies)
-            
-            # Salva a matriz de similaridade em um arquivo .npy
-            similarity_folder = os.path.join('data', 'similarity', user_id)
-            os.makedirs(similarity_folder, exist_ok=True)
-            np.save(os.path.join(similarity_folder, f'{file.filename}_cosine_sim.npy'), cosine_sim)
-            
-            return jsonify({'message': 'File uploaded and processed successfully'}), 200
-        else:
-            return jsonify({'error': 'Invalid file format. Please upload a .tsv, .csv, .xlsx, .xls or .json file.'}), 400
-
+        result = UploadFileService.upload_file(file, idColumn, titleColumn, user_id)
+        if 'error' in result:
+            return jsonify(result), 400
+        return jsonify(result), 200
 
     @app.route('/recommend', methods=['GET'])
     def recommend_route():
