@@ -4,19 +4,19 @@ import numpy as np
 from functions.LoadData import LoadData
 from validator.RecommendationsValidator import RecommendationsValidator  
 
-class GetRecommendationsService:
+class ListRecommendationsService:
 
     @staticmethod 
-    def get_recommendations(movie_id: str, quantity: int, user_id: str, file_name: str) -> Union[List[dict], dict]:
+    def listRecommendations(movie_id: str, quantity: int, user_id: str, file_name: str) -> Union[List[dict], dict]:
 
-        result = RecommendationsValidator.file_Validate(user_id, file_name)
+        result = RecommendationsValidator.fileValidate(user_id, file_name)
         if result is not None:
             return result
         result = RecommendationsValidator.idValidate(movie_id)  
         if result is not None:
             return result
         
-        file_size = LoadData.load_data(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1]).shape[0]
+        file_size = LoadData.loadData(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1]).shape[0]
 
         result = RecommendationsValidator.quantityValidate(quantity, file_size)
         if result is not None:
@@ -24,13 +24,13 @@ class GetRecommendationsService:
 
         cosine_sim = np.load(f'data/similarity/{user_id}/{file_name}_cosine_sim.npy')
 
-        movies = LoadData.load_data(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
+        media_table = LoadData.loadData(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
 
-        idColumn = movies.columns[0]
-        titleColumn = movies.columns[1]
+        id_column_name = media_table.columns[0]
+        title_column_name = media_table.columns[1]
 
         try:
-            idx = movies[movies[idColumn] == movie_id].index[0]
+            idx = media_table[media_table[id_column_name] == movie_id].index[0]
         except IndexError:
             return {"error": f"Movie with ID {movie_id} not found"}
 
@@ -40,7 +40,7 @@ class GetRecommendationsService:
         movie_indices = [i[0] for i in sim_scores]
 
         recommendations = [
-            {idColumn: movies.at[i, idColumn], titleColumn: movies.at[i, titleColumn]}
+            {id_column_name: media_table.at[i, id_column_name], title_column_name: media_table.at[i, title_column_name]}
             for i in movie_indices
         ]
 

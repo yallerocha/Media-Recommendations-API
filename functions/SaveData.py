@@ -3,7 +3,7 @@ import pandas as pd
 class SaveData:
 
     @staticmethod
-    def save_data(df: pd.DataFrame, file_path, file_extension):
+    def saveData(df: pd.DataFrame, file_path, file_extension):
         if file_extension == 'tsv':
             df.to_csv(file_path, sep='\t', index=False)
         elif file_extension == 'csv':

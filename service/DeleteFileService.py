@@ -5,10 +5,10 @@ from validator.RecommendationsValidator import RecommendationsValidator
 class DeleteFileService:
 
     @staticmethod
-    def delete_file(user_id: str, file_name: str) -> dict:
+    def deleteFile(user_id: str, file_name: str) -> dict:
         user_folder = os.path.join('uploads/user_files', user_id)
 
-        result = RecommendationsValidator.file_Validate(user_id, file_name)
+        result = RecommendationsValidator.fileValidate(user_id, file_name)
         if result is not None:
             return result
 

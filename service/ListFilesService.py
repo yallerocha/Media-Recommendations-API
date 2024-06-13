@@ -2,7 +2,7 @@ import os
 
 class ListFilesService:
 
-    def list_files(user_id: str):
+    def listFiles(user_id: str):
         user_folder = os.path.join("uploads/user_files", user_id)
         
         if not os.path.exists(user_folder):

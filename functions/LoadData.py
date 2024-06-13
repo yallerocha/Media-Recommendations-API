@@ -3,7 +3,7 @@ import pandas as pd
 class LoadData:
 
     @staticmethod
-    def load_data(file_path, file_extension) -> pd.DataFrame:
+    def loadData(file_path, file_extension) -> pd.DataFrame:
         if file_extension == 'tsv':
             data = pd.read_csv(file_path, sep='\t')
         elif file_extension == 'csv':

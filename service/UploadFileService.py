@@ -12,7 +12,7 @@ from werkzeug.datastructures import FileStorage
 class UploadFileService:
 
     @staticmethod
-    def upload_file(file: FileStorage, idColumn: str, titleColumn: str, user_id: str) -> dict:
+    def uploadFile(file: FileStorage, id_column_name: str, title_column_name: str, user_id: str) -> dict:
 
         user_folder = os.path.join('uploads/user_files', user_id)
 
@@ -29,19 +29,19 @@ class UploadFileService:
         filepath = os.path.join(user_folder, file_name)
         file.save(filepath)
         
-        movies = LoadData.load_data(filepath, file_extension)
+        media_table = LoadData.loadData(filepath, file_extension)
 
-        result = UploadFileValidator.idColumnNameValidate(idColumn, movies)
+        result = UploadFileValidator.idColumnNameValidate(id_column_name, media_table)
         if result is not None:
             return result
-        result = UploadFileValidator.titleColumnNameValidate(titleColumn, movies)
+        result = UploadFileValidator.titleColumnNameValidate(title_column_name, media_table)
         if result is not None:
             return result
 
-        movies = PreprocessData.preprocess_data(movies, idColumn, titleColumn)
-        SaveData.save_data(movies, filepath, file_extension)
+        media_table = PreprocessData.preprocessData(media_table, id_column_name, title_column_name)
+        SaveData.save_data(media_table, filepath, file_extension)
         
-        cosine_sim = CalculateSimilarity.calculate_similarity(movies)
+        cosine_sim = CalculateSimilarity.calculateSimilarity(media_table)
         
         similarity_folder = os.path.join('data', 'similarity', user_id)
         os.makedirs(similarity_folder, exist_ok=True)

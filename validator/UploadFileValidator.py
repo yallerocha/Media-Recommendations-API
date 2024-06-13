@@ -5,27 +5,27 @@ import pandas as pd
 class UploadFileValidator:
 
     @staticmethod
-    def idColumnNameValidate(id_column: str, movies: pd.DataFrame) -> Union[None, dict]:
-        if id_column is None:
-            return {"error": "idColumn parameter is required"}
-        if len(id_column.strip()) == 0:
-            return {"error": "idColumn parameter cannot be empty"}
-        if id_column not in movies.columns:
-            return {"error": f"Column '{id_column}' does not exist"}
-        if movies[id_column].isnull().any():
-            return {"error": f"Column '{id_column}' contains missing values"}
-        if not movies[id_column].is_unique:
-            return {"error": f"Column '{id_column}' contains duplicate values"}
+    def idColumnNameValidate(id_column_name: str, media_table: pd.DataFrame) -> Union[None, dict]:
+        if id_column_name is None:
+            return {"error": "id_column_name_name parameter is required"}
+        if len(id_column_name.strip()) == 0:
+            return {"error": "id_column_name_name parameter cannot be empty"}
+        if id_column_name not in media_table.columns:
+            return {"error": f"Column '{id_column_name}' does not exist"}
+        if media_table[id_column_name].isnull().any():
+            return {"error": f"Column '{id_column_name}' contains missing values"}
+        if not media_table[id_column_name].is_unique:
+            return {"error": f"Column '{id_column_name}' contains duplicate values"}
 
         return None
     
     @staticmethod
-    def titleColumnNameValidate(title_column: str, movies: pd.DataFrame) -> Union[None, dict]:
+    def titleColumnNameValidate(title_column: str, media_table: pd.DataFrame) -> Union[None, dict]:
         if title_column is None:
-            return {"error": "titleColumn parameter is required"}
+            return {"error": "title_column_name parameter is required"}
         if len(title_column.strip()) == 0:
-            return {"error": "titleColumn parameter cannot be empty"}
-        if title_column not in movies.columns:
+            return {"error": "title_column_name parameter cannot be empty"}
+        if title_column not in media_table.columns:
             return {"error": f"Column '{title_column}' does not exist"}
 
         return None
