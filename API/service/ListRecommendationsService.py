@@ -16,15 +16,15 @@ class ListRecommendationsService:
         if result is not None:
             return result
         
-        file_size = LoadData.loadData(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1]).shape[0]
+        file_size = LoadData.loadData(f'API/uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1]).shape[0]
 
         result = RecommendationsValidator.quantityValidate(quantity, file_size)
         if result is not None:
             return result
 
-        cosine_sim = np.load(f'data/similarity/{user_id}/{file_name}_cosine_sim.npy')
+        cosine_sim = np.load(f'API/data/similarity/{user_id}/{file_name}_cosine_sim.npy')
 
-        media_table = LoadData.loadData(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
+        media_table = LoadData.loadData(f'API/uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
 
         id_column_name = media_table.columns[0]
         title_column_name = media_table.columns[1]

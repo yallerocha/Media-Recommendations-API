@@ -7,9 +7,9 @@ class UploadFileValidator:
     @staticmethod
     def idColumnNameValidate(id_column_name: str, media_table: pd.DataFrame) -> Union[None, dict]:
         if id_column_name is None:
-            return {"error": "id_column_name_name parameter is required"}
+            return {"error": "id_column_name parameter is required"}
         if len(id_column_name.strip()) == 0:
-            return {"error": "id_column_name_name parameter cannot be empty"}
+            return {"error": "id_column_name parameter cannot be empty"}
         if id_column_name not in media_table.columns:
             return {"error": f"Column '{id_column_name}' does not exist"}
         if media_table[id_column_name].isnull().any():

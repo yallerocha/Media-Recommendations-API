@@ -14,7 +14,7 @@ class UploadFileService:
     @staticmethod
     def uploadFile(file: FileStorage, id_column_name: str, title_column_name: str, user_id: str) -> dict:
 
-        user_folder = os.path.join('uploads/user_files', user_id)
+        user_folder = os.path.join('API/uploads/user_files', user_id)
 
         file_name = file.filename
         if file_name == '':
@@ -39,11 +39,11 @@ class UploadFileService:
             return result
 
         media_table = PreprocessData.preprocessData(media_table, id_column_name, title_column_name)
-        SaveData.save_data(media_table, filepath, file_extension)
+        SaveData.saveData(media_table, filepath, file_extension)
         
         cosine_sim = CalculateSimilarity.calculateSimilarity(media_table)
         
-        similarity_folder = os.path.join('data', 'similarity', user_id)
+        similarity_folder = os.path.join('API/data/similarity', user_id)
         os.makedirs(similarity_folder, exist_ok=True)
         np.save(os.path.join(similarity_folder, f'{file_name}_cosine_sim.npy'), cosine_sim)
 
