@@ -6,7 +6,7 @@ class DeleteFileService:
 
     @staticmethod
     def deleteFile(user_id: str, file_name: str) -> dict:
-        user_folder = os.path.join('API/uploads/user_files', user_id)
+        user_folder = os.path.join('api/uploads/user_files', user_id)
 
         result = RecommendationsValidator.fileValidate(user_id, file_name)
         if result is not None:
@@ -19,7 +19,7 @@ class DeleteFileService:
         
         try:
             os.remove(file_path)
-            os.remove(f'API/data/similarity/{user_id}/{file_name}_cosine_sim.npy')
+            os.remove(f'api/data/similarity/{user_id}/{file_name}_cosine_sim.npy')
             return {"message": "File deleted successfully"}
         except Exception as e:
             return {"error": f"Error deleting file: {str(e)}"}

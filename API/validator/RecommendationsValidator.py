@@ -10,7 +10,7 @@ class RecommendationsValidator:
         if len(file_name.strip()) == 0:
             return {"error": "File name cannot be empty"}
 
-        user_folder = os.path.join('API/uploads/user_files', user_id)
+        user_folder = os.path.join('api/uploads/user_files', user_id)
         file_path = os.path.join(user_folder, file_name)
         
         if not os.path.exists(file_path):

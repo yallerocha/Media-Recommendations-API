@@ -3,7 +3,7 @@ import os
 class ListFilesService:
 
     def listFiles(user_id: str):
-        user_folder = os.path.join("API/uploads/user_files", user_id)
+        user_folder = os.path.join("api/uploads/user_files", user_id)
         
         if not os.path.exists(user_folder):
             return {'error': 'No files found for this user'}
