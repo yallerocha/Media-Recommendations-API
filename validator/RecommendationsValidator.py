@@ -4,7 +4,7 @@ from typing import Union
 class RecommendationsValidator:
 
     @staticmethod
-    def file_nameValidate(user_id: str, file_name: str) -> Union[None, dict]:
+    def file_Validate(user_id: str, file_name: str) -> Union[None, dict]:
         if file_name is None:
             return {"error": "File name is required"}
         if len(file_name.strip()) == 0:

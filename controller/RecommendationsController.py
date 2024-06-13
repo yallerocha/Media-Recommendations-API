@@ -1,19 +1,15 @@
 import os
 import sys
-import numpy as np
+
 from flask import Flask, request, jsonify
-import pandas as pd
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from functions.GetClientIP import GetClientIP
 from service.GetRecommendationsService import GetRecommendationsService
 from service.UploadFileService import UploadFileService
-
-from functions.CalculateSimilarity import CalculateSimilarity
-from functions.LoadData import LoadData
-from functions.SaveData import SaveData
-from functions.PreprocessData import PreprocessData
+from service.DeleteFileService import DeleteFileService
+from service.ListFilesService import ListFilesService
 
 app = Flask(__name__)
 
@@ -49,6 +45,29 @@ class RecommendationsController:
         if 'error' in recommendations:
             return jsonify(recommendations), 400
         return jsonify({'recommendations': recommendations}), 200
+    
+    
+    @app.route('/files', methods=['GET'])
+    def list_files():
+        user_id = GetClientIP.get_client_ip(request)
+
+        list_files = ListFilesService.list_files(user_id)
+        if 'error' in list_files:
+            return jsonify(list_files), 404
+        return jsonify(list_files), 200
+    
+    
+    @app.route('/delete', methods=['DELETE'])
+    def delete_file():
+        data = request.get_json()
+        
+        file_name = data.get('file_name')
+        user_id = GetClientIP.get_client_ip(request)
+        
+        result = DeleteFileService.delete_file(user_id, file_name)
+        if 'error' in result:
+            return jsonify(result), 400
+        return jsonify(result), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

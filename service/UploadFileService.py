@@ -11,6 +11,7 @@ from werkzeug.datastructures import FileStorage
 
 class UploadFileService:
 
+    @staticmethod
     def upload_file(file: FileStorage, idColumn: str, titleColumn: str, user_id: str) -> dict:
 
         user_folder = os.path.join('uploads/user_files', user_id)

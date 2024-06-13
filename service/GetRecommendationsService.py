@@ -9,8 +9,7 @@ class GetRecommendationsService:
     @staticmethod 
     def get_recommendations(movie_id: str, quantity: int, user_id: str, file_name: str) -> Union[List[dict], dict]:
 
-        # Validationss
-        result = RecommendationsValidator.file_nameValidate(user_id, file_name)
+        result = RecommendationsValidator.file_Validate(user_id, file_name)
         if result is not None:
             return result
         result = RecommendationsValidator.idValidate(movie_id)  
@@ -23,10 +22,8 @@ class GetRecommendationsService:
         if result is not None:
             return result
 
-        # Load cosine similarity matrix
         cosine_sim = np.load(f'data/similarity/{user_id}/{file_name}_cosine_sim.npy')
 
-        # Load movies data
         movies = LoadData.load_data(f'uploads/user_files/{user_id}/{file_name}', file_name.split('.')[-1])
 
         idColumn = movies.columns[0]
@@ -37,13 +34,11 @@ class GetRecommendationsService:
         except IndexError:
             return {"error": f"Movie with ID {movie_id} not found"}
 
-        # Get similarity scores
         sim_scores = list(enumerate(cosine_sim[idx]))
         sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
         sim_scores = sim_scores[1:quantity + 1]
         movie_indices = [i[0] for i in sim_scores]
 
-        # Return the list of movie titles and ids
         recommendations = [
             {idColumn: movies.at[i, idColumn], titleColumn: movies.at[i, titleColumn]}
             for i in movie_indices
