@@ -2,14 +2,14 @@
     "version": 2,
     "builds": [
       {
-        "src": "API/controller/RecommendationsController.py",
+        "src": "api/app.py",
         "use": "@vercel/python"
       }
     ],
     "routes": [
       {
         "src": "/(.*)",
-        "dest": "API/controller/RecommendationsController.py"
+        "dest": "api/app.py"
       }
     ]
   }
