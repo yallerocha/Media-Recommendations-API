@@ -1,14 +1,18 @@
 from flask import Flask, request, jsonify
 
-from functions.GetClientIP import GetClientIP
-from service.ListRecommendationsService import ListRecommendationsService
-from service.UploadFileService import UploadFileService
-from service.DeleteFileService import DeleteFileService
-from service.ListFilesService import ListFilesService
+from api.functions.GetClientIP import GetClientIP
+from api.service.ListRecommendationsService import ListRecommendationsService
+from api.service.UploadFileService import UploadFileService
+from api.service.DeleteFileService import DeleteFileService
+from api.service.ListFilesService import ListFilesService
 
 app = Flask(__name__)
 
 class RecommendationsController:
+
+    @app.route('/')
+    def index():
+        return 'Recommendations API'
 
     @app.route('/upload', methods=['POST'])
     def uploadFile():

@@ -1,6 +1,6 @@
 import os
 
-from validator.RecommendationsValidator import RecommendationsValidator
+from api.validator.RecommendationsValidator import RecommendationsValidator
 
 class DeleteFileService:
 

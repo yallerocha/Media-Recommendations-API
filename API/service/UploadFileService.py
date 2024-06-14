@@ -1,12 +1,11 @@
 import os
 import numpy as np
 
-from functions.CalculateSimilarity import CalculateSimilarity
-from functions.LoadData import LoadData
-from functions.PreprocessData import PreprocessData
-from functions.SaveData import SaveData
-
-from validator.UploadFileValidator import UploadFileValidator
+from api.functions.CalculateSimilarity import CalculateSimilarity
+from api.functions.LoadData import LoadData
+from api.functions.PreprocessData import PreprocessData
+from api.functions.SaveData import SaveData
+from api.validator.UploadFileValidator import UploadFileValidator
 from werkzeug.datastructures import FileStorage
 
 class UploadFileService:

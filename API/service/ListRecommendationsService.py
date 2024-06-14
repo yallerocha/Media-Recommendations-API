@@ -1,8 +1,8 @@
 from typing import List, Union
 import numpy as np
 
-from functions.LoadData import LoadData
-from validator.RecommendationsValidator import RecommendationsValidator  
+from api.functions.LoadData import LoadData
+from api.validator.RecommendationsValidator import RecommendationsValidator  
 
 class ListRecommendationsService:
 
