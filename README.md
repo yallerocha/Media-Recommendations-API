@@ -1,42 +1,42 @@
-# 🎞 API de Recomendações de Mídia 
+# API de Recomendações de Mídia 🎥🎵
 
-Este projeto é um serviço de recomendação de mídia (filmes, séries, músicas, etc.) que utiliza Machine Learning para recomendar mídias com base em um título fornecido. O usuário pode utilizar sua própria base de dados para obter recomendações personalizadas.
+Este projeto é um serviço de recomendação de mídia (filmes, séries, músicas, etc.) que utiliza Machine Learning para recomendar mídias com base em um título fornecido. O usuário pode utilizar sua própria base de dados para obter recomendações personalizadas. 📈
 
-## Funcionalidades
+## Funcionalidades 🌟
 
-### Upload
+### Upload 📤
 
 - O usuário pode fazer o upload de um arquivo CSV contendo os dados de mídias que deseja utilizar para obter recomendações personalizadas.
 
 ![Upload](assets/images/upload.jpeg)
 
-### Recomendação
+### Recomendação 🎯
 
 - O usuário pode obter recomendações de mídias com base em um título fornecido.
 
 ![Recomendação](assets/images/recomendacao.jpeg)
 
-### Visualização de Arquivos
+### Visualização de Arquivos 👀
 
 - O usuário pode visualizar os arquivos que foram enviados para o sistema.
 
 ![Visualização](assets/images/visualizacao.jpeg)
 
-### Deletar Arquivos
+### Deletar Arquivos 🗑️
 
 - O usuário pode deletar arquivos que foram enviados para o sistema.
 
 ![Deletar](assets/images/deletar.jpeg)
 
-## Tecnologias
+## Tecnologias 🛠️
 
-- Python
-- Flask
-- Pandas
-- Scikit-learn
-- Numpy
+- Python 🐍
+- Flask 🌐
+- Pandas 🐼
+- Scikit-learn 🤖
+- Numpy 🔢
 
-## Como Rodar o Projeto Localmente
+## Como Rodar o Projeto Localmente 🚀
 
 1. Clone o repositório:
     ```sh
@@ -73,6 +73,6 @@ Este projeto é um serviço de recomendação de mídia (filmes, séries, músic
     python app.py
     ```
 
-## Licença
+## Licença 📄
 
 Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE) para mais detalhes.
