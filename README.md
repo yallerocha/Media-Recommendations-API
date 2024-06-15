@@ -1,4 +1,4 @@
-# API de Recomendações de Mídia
+🎞 # API de Recomendações de Mídia
 
 Este projeto é um serviço de recomendação de mídia (filmes, séries, músicas, etc.) que utiliza Machine Learning para recomendar mídias com base em um título fornecido. O usuário pode utilizar sua própria base de dados para obter recomendações personalizadas.
 
