@@ -6,7 +6,7 @@ Este projeto é um serviço de recomendação de mídia (filmes, séries, músic
 
 ### Upload 📤
 
-- O usuário pode fazer o upload de um arquivo CSV contendo os dados de mídias que deseja utilizar para obter recomendações personalizadas.
+- O usuário pode fazer o upload de um arquivo CSV contendo os dados de mídias que deseja utilizar para obter recomendações personalizadas. 
 
 ![Upload](assets/images/upload.jpeg)
 
