@@ -75,4 +75,4 @@ Este projeto é um serviço de recomendação de mídia (filmes, séries, músic
 
 ## Licença
 
-Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE.md) para mais detalhes.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE.md](LICENSE) para mais detalhes.
